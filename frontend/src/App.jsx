@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home.jsx";
-import Upload from "./pages/Upload";
-import Result from "./pages/Result";
-import Explanation from "./pages/Explanation";
-import LegalAid from "./pages/LegalAid";
+import Upload from "./pages/Upload.jsx";
+import Result from "./pages/Result.jsx";
+import Explanation from "./pages/Explanation.jsx";
+import LegalAid from "./pages/LegalAid.jsx";
 
 function App() {
   return (

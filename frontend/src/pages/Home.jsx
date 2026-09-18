@@ -11,7 +11,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar.jsx";
 
 function Home() {
   const navigate = useNavigate();

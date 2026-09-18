@@ -9,7 +9,7 @@ import {
   Scale,
 } from "lucide-react";
 
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar.jsx";
 
 function Result() {
   const navigate = useNavigate();
