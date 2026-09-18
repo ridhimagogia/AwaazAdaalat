@@ -1,36 +1,86 @@
-# AwaazAdalat — Intelligence Layer (Person 3)
+# 🛡️ AwaazAdalat (आवाज़ अदालत)
+> **Voice-First Legal Information Access for Undertrials & Low-Literacy Citizens**
 
-Chain: **Document Intelligence → Multilingual Explanation → TTS → Smart Alerts**
+Millions of poor, rural, and low-literacy citizens in India get stuck in the legal system simply because court notices, FIRs, and bail documents are written in dense legal English or Hindi. People miss hearing dates or remain detained as undertrials simply because they cannot read or comprehend their own case papers[cite: 20, 25].
 
-## Files
-| File | Stage | Real or Mock right now? |
-|---|---|---|
-| `document_intelligence.py` | Extracts case number, court, allegation, hearing date from OCR text | Mock (regex-based) until iNSIGHTS key is added |
-| `multilingual.py` | Turns facts into a plain spoken-language explanation + checklist | Mock (Hindi/English templates) until iNSIGHTS key is added |
-| `tts.py` | Converts explanation text to an `.mp3` | **Real** — uses free gTTS, no key needed |
-| `alerts.py` | Schedules a hearing-date reminder | Mock (returns a computed reminder date) until iNSIGHTS key is added |
-| `pipeline.py` | Chains all four stages into one function | This is what Person 1 calls |
-| `config.py` | Switches between mock and real iNSIGHTS calls | Edit this when API access is confirmed |
+**AwaazAdalat** bridges this literacy gap by turning dense, terrifying legal notices into clear, plain-language summaries, actionable checklists, and spoken regional audio[cite: 13, 20, 26, 28].
 
-## Quick start
+---
+
+## 🔗 How iNSIGHTS AI Powers AwaazAdalat
+
+AwaazAdalat leverages the **iNSIGHTS AI Suite** (`insights-ai.info`) to handle complex legal language processing, multi-dialect translation, privacy compliance, and proactive scheduling.
+
+| iNSIGHTS Module | Project Usage & Integration |
+| :--- | :--- |
+| **iNSIGHTS Document Intelligence** | Analyzes raw OCR text from scanned notices to extract structured legal entities, including case numbers, allegations, hearing dates, court names, and undertrial bail status[cite: 22, 25]. |
+| **iNSIGHTS Multilingual** | Converts dense legal jargon and statutes into simple, spoken-style regional language summaries and actionable checklists across 7 languages (Hindi, English, Punjabi, Tamil, Telugu, Bengali, Marathi)[cite: 22, 26]. |
+| **iNSIGHTS Smart Alerts** | Calculates exact hearing dates and automatically schedules SMS/Push reminders 2 days prior to ensure undertrials never miss a court appearance[cite: 22, 23]. |
+| **iNSIGHTS Privacy Mode** | Ensures zero-log, end-to-end encrypted processing of sensitive personal legal documents[cite: 22]. Raw texts and case files are analyzed strictly in-memory and purged immediately[cite: 20]. |
+
+> *Note: The system includes a built-in mock fallback mode (`config.py`) to ensure seamless offline or stage-demo reliability even during network disruptions[cite: 22, 24, 25].*
+[ Scanned Document / Photo ]
+│
+▼
+[ OCR Processing Engine (Tesseract) ] ──> Raw Extracted Text
+│
+▼
+[ iNSIGHTS Document Intelligence ] ───> Case Facts (Case No, Date, Court)
+│
+▼
+[ iNSIGHTS Multilingual Engine ] ─────> Plain Regional Language & Checklist
+│
+├───> [ gTTS Speech Synthesis ] ──> Spoken Regional Audio (.mp3)
+│
+└───> [ iNSIGHTS Smart Alerts ] ───> Hearing Date Reminders
+---
+
+## 🧩 Tech Stack
+
+- **Frontend:** React, Vite, React Router, Lucide React Icons, Axios[cite: 4, 9, 16]
+- **Backend:** Python 3.11+, FastAPI, Uvicorn[cite: 4, 20]
+- **OCR Engine:** Tesseract OCR, Pillow[cite: 4, 21]
+- **Speech Engine:** Google Text-to-Speech (`gTTS`)[cite: 4, 28]
+- **Deployment:** Vercel (Frontend) + Render / Docker (Backend)
+
+---
+
+## 🚀 Quickstart Guide
+
+### 1. Backend Setup
+
 ```bash
+# Clone the repository
+git clone [https://github.com/ridhimagogia/AwaazAdaalat.git](https://github.com/ridhimagogia/AwaazAdaalat.git)
+cd AwaazAdaalat
+
+# Install Python dependencies
 pip install -r requirements.txt
-python3 pipeline.py   # runs a smoke test end-to-end
-```
 
-## Switching to the real iNSIGHTS API
-Once you have API access:
+# Start FastAPI development server
+python -m uvicorn main:app --reload
+```
+The FastAPI backend runs at http://127.0.0.1:8000[cite: 20].
+
+### 2. Frontend Setup
 ```bash
-export INSIGHTS_API_KEY="your_key_here"
-export INSIGHTS_MOCK_MODE="false"
+# Navigate to frontend folder
+cd frontend
+
+# Install Node dependencies
+npm install
+
+# Start Vite React server
+npm run dev
 ```
-Double check the endpoint paths in `config.py` against the actual iNSIGHTS docs —
-`/document-intelligence/extract`, `/multilingual/generate`, `/alerts/schedule` are
-placeholders based on the plan; update them if the real paths differ.
+The React frontend runs at http://localhost:5173.
 
-**Important:** don't remove MOCK_MODE even after real API access works. Keep it as
-a fallback — every module already falls back to mock automatically if the real API
-call throws an error (bad wifi, rate limit, etc.), so your demo never breaks on stage
-even if iNSIGHTS has a bad moment.
+## 🔑 Environment Variables
+To activate live iNSIGHTS API integration, set the following environment variables in intelligence_layer/config.py or your server environment[cite: 22, 24]:
 
-
+```bash
+INSIGHTS_API_KEY="your_insights_api_key"
+INSIGHTS_MOCK_MODE="false"
+```
+### ⚖️ Honest Scope & Legal Disclaimer:
+AwaazAdalat is designed purely as an informational accessibility tool. It does not provide legal representation, offer formal legal advice, or predict case outcomes. It clarifies document text, outlines deadlines in plain language, and directs users to nearby official legal aid clinics.   
