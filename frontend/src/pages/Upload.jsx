@@ -12,6 +12,10 @@ import {
 
 import Navbar from "../components/Navbar.jsx";
 
+const response = await axios.post(`${API_URL}/analyze-document`, formData, {
+  headers: { "Content-Type": "multipart/form-data" },
+});
+
 function Upload() {
   const navigate = useNavigate();
 
@@ -44,7 +48,7 @@ function Upload() {
       formData.append("user_id", "user_1");
       formData.append("language", language);
 
-      const response = await axios.post("/analyze-document", formData, {
+      const response = await axios.post(`${API_URL}/analyze-document`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
