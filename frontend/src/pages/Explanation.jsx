@@ -9,7 +9,7 @@ import {
   Volume2,
 } from "lucide-react";
 
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar.jsx";
 
 function Explanation() {
   const navigate = useNavigate();
