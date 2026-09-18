@@ -29,7 +29,7 @@ function Explanation() {
       return;
     }
 
-    const audio = new Audio(data.audio_url);
+    const audio = new Audio(`${API_URL}${audioUrl}`);
     setPlaying(true);
     audio.play();
     audio.onended = () => setPlaying(false);
